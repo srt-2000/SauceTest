@@ -1,0 +1,6 @@
+.idea
+.venv
+todo.txt
+.env
+__pycache__/
+*.pyc
