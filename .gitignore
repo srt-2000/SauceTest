@@ -4,3 +4,4 @@ todo.txt
 .env
 __pycache__/
 *.pyc
+.ruff_cache/
