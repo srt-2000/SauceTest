@@ -20,6 +20,9 @@ class Messages(StrEnum):
     REMOVED_PRODUCT_ON_WEB = "Removed product from cart on resource"
     CHECKED_CARTS_SYNC = "Checked sync resource and local carts"
     CHECKOUT = "Checkout resource cart"
+    USER_INFO_FORM_SENT = "User info form sent"
+    XLSX_SAVED = "XLSX saved"
+    PDF_SAVED = "PDF saved"
 
 
 class Fields(StrEnum):
@@ -28,9 +31,14 @@ class Fields(StrEnum):
     STANDARD_USER = "STANDARD_USER"
     PASSWORD = "PASSWORD"
     RESOURCE_URL = "RESOURCE_URL"
+    USER_FIRST_NAME = "USER_FIRST_NAME"
+    USER_LAST_NAME = "USER_LAST_NAME"
+    ZIP_CODE = "ZIP_CODE"
 
 
 class Values(StrEnum):
     """Shared literal values (e.g. Playwright test-id attribute name)."""
 
     DATA_TEST = "data-test"
+    XLSX_FILE_NAME = "order_summary.xlsx"
+    PDF_FILE_NAME = "order.pdf"

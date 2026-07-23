@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from playwright.sync_api import Page, expect
 
-from domains import SelectedProduct
+from domains.cart import SelectedProductValueObject
 from page_handlers.constants import PageLocators, Values
 from services.local_cart import LocalCart
 
@@ -51,7 +51,7 @@ class CartPage:
                 local_cart_len_text
             )
 
-        local_cart_products: dict[str, SelectedProduct] = local_cart.get_items
+        local_cart_products: dict[str, SelectedProductValueObject] = local_cart.get_items
         for product_id in local_cart_products:
             expect(
                 self._page.get_by_test_id(f"{Values.REMOVE_PREFIX}{product_id}")

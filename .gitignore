@@ -5,3 +5,4 @@ todo.txt
 __pycache__/
 *.pyc
 .ruff_cache/
+result/*

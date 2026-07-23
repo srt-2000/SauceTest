@@ -1,6 +1,6 @@
 """CSS / data-test locators and shared page-handler constants."""
 
-from enum import StrEnum
+from enum import StrEnum, IntEnum
 
 
 class PageLocators(StrEnum):
@@ -20,14 +20,29 @@ class PageLocators(StrEnum):
     CART_ITEM = ".cart_item"
     CHECKOUT_BUTTON = "[data-test='checkout']"
     CHECKOUT_INFO = ".checkout_info"
+    FIRST_NAME = "[data-test='firstName']"
+    LAST_NAME = "[data-test='lastName']"
+    POSTAL_CODE = "[data-test='postalCode']"
+    CONTINUE_BUTTON = "[data-test='continue']"
+    SUMMARY_INFO = ".summary_info"
+    PAYMENT_INFO_VALUE = "[data-test='payment-info-value']"
+    SHIPPING_INFO_VALUE = "[data-test='shipping-info-value']"
+    TAX_LABEL = "[data-test='tax-label']"
+    TOTAL_LABEL = "[data-test='total-label']"
+    FINISH_BUTTON = "[data-test='finish']"
+    COMPLETE_HEADER = "[data-test='complete-header']"
+    GENERATE_PDF_BUTTON = "text=Generate PDF order"
+    CART_QUANTITY = ".cart_quantity"
+    ITEM_TOTAL_LABEL = "[data-test='subtotal-label']"
 
 
 class Messages(StrEnum):
-    """Error messages for inventory / price parsing helpers."""
+    """Error messages for page handlers and price-parsing helpers."""
 
     UNEXPECTED_DATA = "unexpected data"
     INVALID_PRICE_TEXT = "invalid price text"
     MISSING_DATA_TEST = "missing data-test on add button"
+    PRODUCT_NOT_IN_LOCAL_CART = "overview product not found in local cart"
 
 
 class Values(StrEnum):
@@ -39,3 +54,9 @@ class Values(StrEnum):
     INDEX = "index"
     DOLLAR = "$"
     EMPTY = ""
+
+
+class IntValues(IntEnum):
+    """Integer indices used when splitting labeled price strings."""
+
+    PRICE_VALUE_INDEX = 1

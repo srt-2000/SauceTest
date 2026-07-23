@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from loguru import logger
 
-from domains import SelectedProduct
+from domains.cart import SelectedProductValueObject
 from services.constants import Messages
 
 
@@ -12,14 +12,14 @@ class LocalCart:
     """Local cart keyed by product slug; insertion order is preserved.
 
     Attributes:
-        _items: Internal mapping of product slug to ``SelectedProduct``.
+        _items: Internal mapping of product slug to ``SelectedProductValueObject``.
     """
 
     def __init__(self) -> None:
         """Create an empty local cart."""
-        self._items: dict[str, SelectedProduct] = {}
+        self._items: dict[str, SelectedProductValueObject] = {}
 
-    def add(self, product_to_add: SelectedProduct) -> None:
+    def add(self, product_to_add: SelectedProductValueObject) -> None:
         """Add or replace a product in the local cart.
 
         Args:
@@ -28,13 +28,13 @@ class LocalCart:
         item_id: str = product_to_add.product_id
         self._items[item_id] = product_to_add
 
-    def pop_last(self) -> SelectedProduct:
+    def pop_last(self) -> SelectedProductValueObject:
         """Remove and return the rightmost (last inserted) product.
 
         Corresponds to scenario step 4.
 
         Returns:
-            The removed ``SelectedProduct``.
+            The removed ``SelectedProductValueObject``.
 
         Raises:
             KeyError: If the cart is empty.
@@ -48,14 +48,14 @@ class LocalCart:
 
         return product
 
-    def remove(self, product_id: str) -> SelectedProduct:
+    def remove(self, product_id: str) -> SelectedProductValueObject:
         """Remove a product by slug from the local cart.
 
         Args:
             product_id: Product slug to remove.
 
         Returns:
-            The removed ``SelectedProduct``.
+            The removed ``SelectedProductValueObject``.
 
         Raises:
             KeyError: If ``product_id`` is not in the cart.
@@ -67,7 +67,7 @@ class LocalCart:
         return self._items.pop(product_id)
 
     @property
-    def get_items(self) -> dict[str, SelectedProduct]:
+    def get_items(self) -> dict[str, SelectedProductValueObject]:
         """Return a shallow copy of the cart mapping.
 
         Returns:

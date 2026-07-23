@@ -42,11 +42,17 @@ class ProjectSettings:
         STANDARD_USER: Login username.
         PASSWORD: Login password.
         RESOURCE_URL: Base URL of the SauceDemo site.
+        USER_FIRST_NAME: Checkout form first name.
+        USER_LAST_NAME: Checkout form last name.
+        ZIP_CODE: Checkout form postal / ZIP code.
     """
 
     STANDARD_USER: str
     PASSWORD: str
     RESOURCE_URL: str
+    USER_FIRST_NAME: str
+    USER_LAST_NAME: str
+    ZIP_CODE: str
 
     @classmethod
     def get_from_env_and_check(
@@ -68,6 +74,9 @@ class ProjectSettings:
             STANDARD_USER=_to_check_variable_is_exist(Fields.STANDARD_USER),
             PASSWORD=_to_check_variable_is_exist(Fields.PASSWORD),
             RESOURCE_URL=_to_check_variable_is_exist(Fields.RESOURCE_URL),
+            USER_FIRST_NAME=_to_check_variable_is_exist(Fields.USER_FIRST_NAME),
+            USER_LAST_NAME=_to_check_variable_is_exist(Fields.USER_LAST_NAME),
+            ZIP_CODE=_to_check_variable_is_exist(Fields.ZIP_CODE),
         )
 
         return settings_from_env

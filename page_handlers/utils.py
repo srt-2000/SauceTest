@@ -6,7 +6,7 @@ from decimal import Decimal, InvalidOperation
 
 from loguru import logger
 
-from page_handlers.constants import Messages, Values
+from page_handlers.constants import Messages, Values, IntValues
 
 
 def handle_str_to_decimal(raw_value: str) -> Decimal:
@@ -51,3 +51,26 @@ def get_product_slug(data: str) -> str:
         raise ValueError
 
     return data.removeprefix(target_prefix)
+
+
+def to_clear_labeled_price_to_decimal_digit(raw_value: str) -> Decimal:
+    """Parse labeled price text such as ``Tax: $2.40`` to ``Decimal``.
+
+    Args:
+        raw_value: Labeled amount from overview (must contain ``$``).
+
+    Returns:
+        Parsed monetary amount after the dollar sign.
+
+    Raises:
+        ValueError: If ``raw_value`` has no ``$`` or is not a valid decimal.
+    """
+    if Values.DOLLAR not in raw_value:
+        raise ValueError(f"{Messages.INVALID_PRICE_TEXT}: {raw_value!r}")
+
+    cleared_price: str = raw_value.split(
+        sep=Values.DOLLAR,
+        maxsplit=1
+    )[IntValues.PRICE_VALUE_INDEX].strip()
+
+    return handle_str_to_decimal(f"{Values.DOLLAR}{cleared_price}")

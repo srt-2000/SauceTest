@@ -5,7 +5,7 @@ from __future__ import annotations
 from playwright.sync_api import Page, expect, Locator
 from loguru import logger
 
-from domains import SelectedProduct
+from domains.cart import SelectedProductValueObject
 from page_handlers.constants import PageLocators, Values, Messages
 from page_handlers.utils import handle_str_to_decimal, get_product_slug
 from services.local_cart import LocalCart
@@ -45,7 +45,7 @@ class InventoryPage:
                 raise RuntimeError
 
             product_id: str = get_product_slug(add_button_data)
-            product = SelectedProduct(
+            product = SelectedProductValueObject(
                 product_id=product_id,
                 name=item.locator(PageLocators.INVENTORY_ITEM_NAME)
                 .inner_text()
