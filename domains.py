@@ -1,13 +1,14 @@
 from dataclasses import dataclass
+from decimal import Decimal
 
 
 @dataclass(frozen=True, slots=True)
-class Product:
-    """Product captured from the storefront."""
+class SelectedProduct:
+    """Product added to cart and stored in local cart state."""
+    product_id: str
     name: str
     description: str
-    price: float
-    remove_id: str | None = None
+    price: Decimal
 
 
 @dataclass(slots=True)
@@ -16,6 +17,6 @@ class OrderSummary:
 
     payment_info: str
     shipping_info: str
-    tax: float
-    total: float
-    items: list[Product]
+    tax: Decimal
+    total: Decimal
+    items: dict[str, SelectedProduct]
