@@ -1,14 +1,29 @@
+"""Helpers for parsing inventory prices and product slugs."""
+
 from __future__ import annotations
 
 from decimal import Decimal, InvalidOperation
+
 from loguru import logger
 
 from page_handlers.constants import Messages, Values
 
 
 def handle_str_to_decimal(raw_value: str) -> Decimal:
-    """Convert a price label like '$29.99' to Decimal."""
-    normalized_number_value: str = raw_value.replace("$", "").strip()
+    """Convert a price label like ``$29.99`` to ``Decimal``.
+
+    Args:
+        raw_value: Raw price text from the page (may include ``$``).
+
+    Returns:
+        Parsed monetary amount.
+
+    Raises:
+        ValueError: If ``raw_value`` is not a valid decimal after cleanup.
+    """
+    normalized_number_value: str = raw_value.replace(
+        Values.DOLLAR, Values.EMPTY
+    ).strip()
 
     try:
         return Decimal(normalized_number_value)
@@ -18,7 +33,17 @@ def handle_str_to_decimal(raw_value: str) -> Decimal:
 
 
 def get_product_slug(data: str) -> str:
-    """Extract product slug from add-to-cart data-test attribute."""
+    """Extract product slug from an add-to-cart ``data-test`` attribute.
+
+    Args:
+        data: Full ``data-test`` value, e.g. ``add-to-cart-sauce-labs-backpack``.
+
+    Returns:
+        Product slug without the add-to-cart prefix.
+
+    Raises:
+        ValueError: If ``data`` does not start with the expected prefix.
+    """
     target_prefix: str = Values.ADD_TO_CART_PREFIX
 
     if not data.startswith(target_prefix):

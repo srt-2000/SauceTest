@@ -1,5 +1,7 @@
 """Login page actions for SauceDemo."""
+
 from playwright.sync_api import Page, expect
+
 from page_handlers.constants import PageLocators
 
 
@@ -7,11 +9,20 @@ class LoginPage:
     """Interact with the SauceDemo login form."""
 
     def __init__(self, page: Page) -> None:
-        """Bind Playwright page instance."""
+        """Bind a Playwright page instance.
+
+        Args:
+            page: Active Playwright ``Page``.
+        """
         self._page = page
 
     def login(self, username: str, password: str) -> None:
-        """Authenticate and wait for the inventory list."""
+        """Authenticate and wait for the inventory list.
+
+        Args:
+            username: SauceDemo username.
+            password: SauceDemo password.
+        """
         self._page.locator(PageLocators.USERNAME).fill(username)
         self._page.locator(PageLocators.PASSWORD).fill(password)
         self._page.locator(PageLocators.LOGIN_BUTTON).click()
